@@ -1,5 +1,6 @@
 const path = require("path");
 const http = require("http");
+const _ = require("lodash");
 const express = require("express");
 const socketIO = require("socket.io");
 
@@ -21,6 +22,9 @@ io.on('connection', function(socket){
     
     socket.on('createMessage', function(message){
         console.log('Create Message', message);
+        io.emit('newMessage', _.assign({ 
+            'createdAt': new Date().getTime()
+        }, _.pick(message, ['from', 'text'])));
     });
     
     socket.emit('newMessage', {
