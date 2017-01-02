@@ -18,6 +18,16 @@ io.on('connection', function(socket){
     socket.on('disconnect', function(){
         console.log('Client Bye Bye');
     });
+    
+    socket.on('createMessage', function(message){
+        console.log('Create Message', message);
+    });
+    
+    socket.emit('newMessage', {
+        from: 'Shebo',
+        text: 'Hellllllo',
+        createdAt: 543
+    });
 });
 
 // app.get('/', function(req, res){
