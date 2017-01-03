@@ -24,7 +24,7 @@ io.on('connection', function(socket){
     socket.on('createMessage', function(message, callback){
         console.log('Create Message', message);
         io.emit('newMessage', generateMessage(message.from, message.text));
-        if(callback) callback('this is the serverrr');
+        if(callback) callback();
     });
 
     socket.on('createLocationMessage', function(coords){
