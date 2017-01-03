@@ -4,7 +4,7 @@ const _ = require("lodash");
 const express = require("express");
 const socketIO = require("socket.io");
 
-const {generateMessage} = require('./utils/message.js');
+const {generateMessage, generateLocationMessage} = require('./utils/message.js');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
@@ -20,15 +20,15 @@ io.on('connection', function(socket){
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
 
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
-
-    socket.on('disconnect', function(){
-        console.log('Client Bye Bye');
-    });
     
     socket.on('createMessage', function(message, callback){
         console.log('Create Message', message);
         io.emit('newMessage', generateMessage(message.from, message.text));
         if(callback) callback('this is the serverrr');
+    });
+
+    socket.on('createLocationMessage', function(coords){
+        io.emit('newLocationMessage', generateLocationMessage('Admin', coords));
     });
 });
 
