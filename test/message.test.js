@@ -1,6 +1,6 @@
-  const expect = require('expect');
+const expect = require('expect');
 
-  var {generateMessage, generateLocationMessage} = require('../server/utils/message.js');
+var {generateMessage, generateLocationMessage} = require('../server/utils/message.js');
 
 describe('generateMessage', function(){
     it('should generate correct message object', function(){
