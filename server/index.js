@@ -25,9 +25,10 @@ io.on('connection', function(socket){
         console.log('Client Bye Bye');
     });
     
-    socket.on('createMessage', function(message){
+    socket.on('createMessage', function(message, callback){
         console.log('Create Message', message);
         io.emit('newMessage', generateMessage(message.from, message.text));
+        if(callback) callback('this is the serverrr');
     });
 });
 
